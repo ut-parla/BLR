@@ -7,7 +7,18 @@ np.set_printoptions(suppress=True)
 M = 10
 N = 10
 
-A = np.random.randn(M, N)
+def random_matrix():
+    return np.random.randn(M, N)
+
+def random_matrix_svd(bandwidth=0.7):
+    A = np.random.randn(M, N)
+    U, S, V = np.linalg.svd(A)
+    m = A.shape[1]
+    idx = np.arange(m)
+    S = S * np.exp(-idx/bandwidth) 
+    return U @ np.diag(S) @ V
+
+A = random_matrix_svd()
 x = np.random.randn(N)
 
 print(f"Shapes: A={A.shape} x={x.shape}")
@@ -25,8 +36,11 @@ print(f"Partition P2 \n{P2}")
 print(f"Partition P3 \n{P3}")
 print(f"Partition P4 \n{P4}")
 
-def concat_1d(P1, P2, P3, P4):
-    return np.block([P1 + P2, P3 + P4])
+def reduce(P1, P2):
+    return P1 + P2
+
+def concat_1d(P1, P2):
+    return np.block([P1, P2])
 
 def concat_matrix(P1, P2, P3, P4):
     return np.block([[P1, P2], [P3, P4]])
@@ -41,14 +55,19 @@ P1x = P1@x1
 P2x = P2@x2
 P3x = P3@x1
 P4x = P4@x2
-PAx = concat_1d(P1x, P2x, P3x, P4x)
+PAx = concat_1d(reduce(P1x, P2x), reduce(P3x, P4x))
 print(f"Multiplication of Ax by Partition: \n{PAx}")
-print(f"Is multiplication correct? {(PAx == Ax).all()}")
-print(f"Abs error: {PAx-Ax}")
+print(f"Is multiplication correct? {np.allclose(PAx, Ax, rtol=0)}")
 
+print(f"Decomposition of P1: \n{np.linalg.svd(P1)}")
 
-P1u, P1s, P1vh = np.linalg.svd(P1)
-print(f"Decomposition of P1: \n{P1u, P1s, P1vh}")
+def TSVD(A, tol=1e-5):
+	U,S,Vh = np.linalg.svd(A)
+	scale = S/S[1]
+	temp_k = np.argmax(scale < tol)
+	k = temp_k if temp_k else A.shape[1]
+	return U[:, :k] @ np.diag(S[:k]), Vh[:k, :]
 
+U, V = TSVD(P1)
 
-
+print(f"U,V of P1: {U}\n{V}")
