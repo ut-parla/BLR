@@ -69,5 +69,20 @@ def TSVD(A, tol=1e-5):
 	return U[:, :k] @ np.diag(S[:k]), Vh[:k, :]
 
 U, V = TSVD(P1)
+print(f"U,V of P1: \n{U}\n{V}")
 
-print(f"U,V of P1: {U}\n{V}")
+P1U, P1V = TSVD(P1)
+P1approx = P1U @ (P1V @ x1)
+
+P2U, P2V = TSVD(P2)
+P2approx = P2U @ (P2V @ x2)
+
+P3U, P3V = TSVD(P3)
+P3approx = P3U @ (P3V @ x1)
+
+P4U, P4V = TSVD(P4)
+P4approx = P4U @ (P4V @ x2)
+
+Aapprox = concat_1d(reduce(P1approx, P2approx), reduce(P3approx, P4approx))
+print(f"BLR of Ax: \n{PAx}")
+print(f"Absolute diff of Ax and BLR: {Ax-Aapprox}")
