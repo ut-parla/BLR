@@ -24,11 +24,21 @@ x = np.random.randn(N)
 print(f"Shapes: A={A.shape} x={x.shape}")
 print(f"A: \n{A}")
 
-P1 = A[0:5,0:5]
-P2 = A[0:5,5:10]
-P3 = A[5:10,0:5]
-P4 = A[5:10,5:10]
-x1, x2 = x[0:5], x[5:10]
+
+# P1 = A[0:5,0:5]
+# P2 = A[0:5,5:10]
+# P3 = A[5:10,0:5]
+# P4 = A[5:10,5:10]
+def partition_matrix(A, block_size):
+    return A.reshape(A.shape[0] // block_size, block_size, A.shape[1] // block_size, block_size).swapaxes(1,2)
+row1, row2 = partition_matrix(A, 5)
+P1, P2, = row1[0], row1[1]
+P3, P4, = row2[0], row2[1]
+
+#x1, x2 = x[0:5], x[5:10]
+def partition_array(A, block_size):
+    return np.array_split(A, block_size)
+x1, x2 = partition_array(x, 2)
 
 print(f"Partitioning A into 4 blocks..")
 print(f"Partition P1 \n{P1}")
@@ -73,16 +83,12 @@ print(f"U,V of P1: \n{U}\n{V}")
 
 P1U, P1V = TSVD(P1)
 P1approx = P1U @ (P1V @ x1)
-
 P2U, P2V = TSVD(P2)
 P2approx = P2U @ (P2V @ x2)
-
 P3U, P3V = TSVD(P3)
 P3approx = P3U @ (P3V @ x1)
-
 P4U, P4V = TSVD(P4)
 P4approx = P4U @ (P4V @ x2)
-
 Aapprox = concat_1d(reduce(P1approx, P2approx), reduce(P3approx, P4approx))
 print(f"BLR of Ax: \n{PAx}")
 print(f"Absolute diff of Ax and BLR: {Ax-Aapprox}")
