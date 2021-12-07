@@ -64,7 +64,7 @@ b2_lhs_split = partition_array(b2_bypartition_lhs, n_partitions)
 with Timer.get_handle("by-partition"):
     for i in range(n_partitions):
         for j in range(n_partitions):
-            b2_lhs_split[i] += (A_partitions_rows[i][j] @ b2_rhs_split[i])
+            b2_lhs_split[i] += (A_partitions_rows[i][j] @ b2_rhs_split[j])
 
 print("Relative error of by partition and direct:")
 print((b1-b2_bypartition_lhs)/b1)
@@ -105,7 +105,7 @@ with Timer.get_handle("full-svd-approximation"):
     for i in range(n_partitions):
         for j in range(n_partitions):
             #this is probably not correct
-            b2_lhs_split[i] += UVs[i][j][U] @ (UVs[i][j][V] @ b2_rhs_split[i])
+            b2_lhs_split[i] += UVs[i][j][U] @ (UVs[i][j][V] @ b2_rhs_split[j])
 
 Timer.print()
 
