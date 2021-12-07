@@ -5,9 +5,9 @@ from timer import Timer
 np.set_printoptions(precision=5)
 np.set_printoptions(suppress=True)
 
-M = 100
-N = 100
-partition_size = 20
+M = 20
+N = 20
+partition_size = 10
 n_partitions = N // partition_size
 
 #
@@ -25,7 +25,7 @@ def random_matrix_svd(bandwidth=0.7):
     S = S * np.exp(-idx/bandwidth) 
     return U @ np.diag(S) @ V
 
-A = random_matrix()
+A = random_matrix_svd()
 x = np.random.randn(N)
 
 print(f"Shapes: A={A.shape} x={x.shape}")
@@ -34,8 +34,11 @@ print(f"# of partitions: {n_partitions}")
 def partition_matrix(A, block_size):
     return A.reshape(A.shape[0] // block_size, block_size, A.shape[1] // block_size, block_size).swapaxes(1,2)
 
-A_partitions_rows = partition_matrix(A, 20)
+A_partitions_rows = partition_matrix(A, partition_size)
 print(f"A_partitions_rows shape: {A_partitions_rows.shape}")
+
+#print(A)
+#print(A_partitions_rows)
 
 def partition_array(A, block_size):
     return np.split(A, block_size)
@@ -48,6 +51,23 @@ print(f"x_split shape: {len(x_split)} x {x_split[0].shape}")
 #
 with Timer.get_handle("numpy-direct"):
     b1 = A @ x
+
+#
+# by partition
+#
+
+b2_bypartition_rhs = x.copy()
+b2_bypartition_lhs = np.zeros(x.shape)
+b2_rhs_split = partition_array(b2_bypartition_rhs, n_partitions)
+b2_lhs_split = partition_array(b2_bypartition_lhs, n_partitions)
+
+with Timer.get_handle("by-partition"):
+    for i in range(n_partitions):
+        for j in range(n_partitions):
+            b2_lhs_split[i] += (A_partitions_rows[i][j] @ b2_rhs_split[i])
+
+print("Relative error of by partition and direct:")
+print((b1-b2_bypartition_lhs)/b1)
 
 #
 # decompose
@@ -75,20 +95,24 @@ print(f"Shape of UV for one partition's SVD decomposition {UVs[0][0][U].shape} {
 # full approximation
 #
 
-b2 = x.copy()
-b2_split = partition_array(b2, n_partitions)
+b2_rhs = x.copy()
+b2_lhs = np.zeros(x.shape)
+
+b2_rhs_split = partition_array(b2_rhs, n_partitions)
+b2_lhs_split = partition_array(b2_lhs, n_partitions)
 
 with Timer.get_handle("full-svd-approximation"):
     for i in range(n_partitions):
         for j in range(n_partitions):
             #this is probably not correct
-            b2_split[i] += UVs[i][j][U] @ (UVs[i][j][V] @ b2_split[i])
+            b2_lhs_split[i] += UVs[i][j][U] @ (UVs[i][j][V] @ b2_rhs_split[i])
 
 Timer.print()
 
-print("Relative error:")
-print((b2-b1)/b1)
+print("Relative error of direct and approx:")
+print((b2_lhs-b1)/b1)
 
-
+print("Relative error of by partition and approx:")
+print((b2_lhs-b2_bypartition_lhs)/b1)
 
 sys.exit(0)
