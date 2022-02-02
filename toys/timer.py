@@ -42,7 +42,7 @@ class TimerClass:
         for name, times in self.times.items():
             avg    = statistics.mean(times)
             stddev = statistics.pstdev(times)
-            print(f"{name}, {avg}, {stddev}")
+            print(f"{name}, {avg:.5f}, {stddev:.5f}")
         print("*"*50)
 
     def reset(self):

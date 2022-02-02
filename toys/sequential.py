@@ -5,9 +5,9 @@ from timer import Timer
 np.set_printoptions(precision=5)
 np.set_printoptions(suppress=True)
 
-M = 1000
-N = 1000
-partition_size = 50
+M = 100000
+N = 100000
+partition_size = 1000
 n_partitions = N // partition_size
 
 #
@@ -140,7 +140,7 @@ cp_b2_lhs_split = cp_partition_array(cp_b2_lhs, n_partitions)
 with Timer.get_handle("cupy-SVD-mult-approximation"):
     for i in range(n_partitions):
         for j in range(n_partitions):
-            cp_b2_lhs_split[i] += cp.matmul(UVs[i][j][U], cp.matmul(UVs[i][j][V], b2_rhs_split[j]))
+            cp_b2_lhs_split[i] += cp.matmul(cp_UVs[i][j][U], cp.matmul(cp_UVs[i][j][V], cp_b2_rhs_split[j]))
 
 
 
