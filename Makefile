@@ -7,8 +7,9 @@ all:
 	git submodule update --init --recursive
 	. .parla/bin/activate && cd Parla.py && python3 setup.py install
 
-	export LD_LIBRARY_PATH=/usr/local/cuda-11.4/lib64
+	export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 
-
-	cd app
-	python3 main.py
+run:
+	@echo ". .parla/bin/activate"
+	@echo "cd app"
+	@echo "python3 main.py"

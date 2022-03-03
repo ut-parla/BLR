@@ -1,6 +1,6 @@
 setuptools==39.0.1
 psutil==5.8.0
-cupy-cuda114==10.1.0
+cupy-cuda115==10.1.0
 numpy==1.20.1
 llvmlite==0.35.0
 Cython==0.29.27
