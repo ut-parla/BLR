@@ -65,7 +65,7 @@ async def __parla_BLR(A, x, partition_size):
 
         for i in range(n_partitions):
             for j in range(n_partitions):
-                print(b_lhs[i][j])
+                #print(b_lhs[i][j])
                 @spawn(BLR_TS[i, j], placement=gpu, input=[*cp_UVs[i][j], x_rhs_parray[i]], output=[b_lhs[i][j]])
                 def blr_task():
                     #print(cp_UVs[i][j][1])
@@ -84,5 +84,5 @@ async def __parla_BLR(A, x, partition_size):
                 final_lhs_split[i] += b_lhs[i][j].get()
 
         res = np.concatenate(final_lhs_split, axis=None)
-        print("parla res: ", res)
+        #print("parla res: ", res)
 

@@ -19,6 +19,7 @@ class GPUCell:
     def launch(self):
         """Launch ourselves as thread"""
         self.thread = threading.Thread(target=self.run)
+        self.thread.daemon = True
         self.thread.start()
 
     def run(self):
