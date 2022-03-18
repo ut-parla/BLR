@@ -60,9 +60,9 @@ def main():
     #gpu_direct(A, x, partition_size)
     #gpu_BLR(A, x, partition_size)
 
-    mgpu_BLR(A, x, partition_size)
+    #mgpu_BLR(A, x, partition_size)
 
-    #parla_BLR(A, x, partition_size)
+    parla_BLR(A, x, partition_size)
 
     Timer.print()
     #os.kill(os.getpid(),11)

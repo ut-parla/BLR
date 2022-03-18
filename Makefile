@@ -5,7 +5,7 @@ all:
 	python3.7 -m venv .parla
 	. .parla/bin/activate && pip install wheel && pip install -r requirements.txt
 	git submodule update --init --recursive
-	. .parla/bin/activate && cd Parla.py && python3 setup.py install
+	pip install -e Parla.py/
 
 	export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 
