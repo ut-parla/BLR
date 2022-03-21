@@ -55,8 +55,7 @@ def main():
         partition_size = int(sys.argv[5])
         
         ptype = sys.argv[2]
-        
-        
+                
         if ptype == "cpudot":
             cpu_direct(A, x, partition_size)
         elif ptype == "cpupart":
