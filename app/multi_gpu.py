@@ -115,7 +115,7 @@ def mgpu_BLR(A, x, partition_size):
     with Timer.get_handle("multigpu-setup"):
         n_partitions = A.shape[1] // partition_size
         A_partitions_rows = partition_matrix(A, partition_size)
-        x_split = partition_array(x, n_partitions)
+        x_split = cp.asarray(partition_array(x, n_partitions))
         partitions_list = list(product(range(n_partitions), range(n_partitions)))
         partition_split = np.array_split(partitions_list, ngpus)
         init_gpu_cells()
