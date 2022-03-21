@@ -1,15 +1,17 @@
 .PHONY: all docker
 
-all:
-	sudo apt install -y python3.7 python3.7-dev python3.7-venv libunwind-dev
-	python3.7 -m venv .parla
-	. .parla/bin/activate && pip install wheel && pip install -r requirements.txt
-	git submodule update --init --recursive
-	pip install -e Parla.py/
-
-	export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-
 run:
-	@echo ". .parla/bin/activate"
+	@echo "conda activate parla"
 	@echo "cd app"
 	@echo "python3 main.py"
+
+conda-install:
+	wget https://repo.anaconda.com/miniconda/Miniconda3-py38_4.11.0-Linux-x86_64.sh
+	sh Miniconda3-py38_4.11.0-Linux-x86_64.sh
+	rm Miniconda3-py38_4.11.0-Linux-x86_64.sh
+
+conda-init:
+	conda create --name parla --file conda_deps.txt
+	git submodule update --init --recursive
+	conda activate parla && pip install -e Parla.py/
+	@echo To activate, run:   conda activate parla
