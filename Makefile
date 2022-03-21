@@ -15,3 +15,9 @@ conda-init:
 	git submodule update --init --recursive
 	conda activate parla && pip install -e Parla.py/
 	@echo To activate, run:   conda activate parla
+
+
+create-inputs:
+	mkdir inputs
+	python app/main.py gen 10000 inputs/Arand10k.mat.npy inputs/xrand10k.mat.npy
+	python app/main.py gen 20000 inputs/Arand20k.mat.npy inputs/xrand20k.mat.npy

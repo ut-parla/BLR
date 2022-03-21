@@ -25,8 +25,9 @@ np.set_printoptions(suppress=True)
 #     return U @ np.diag(S) @ V
 
 def random_matrix_svd(M, rank=10):
-    A = np.random.randn(M, M)
-    U, S, V = np.linalg.svd(A)
+    import cupy as cp
+    A = cp.random.randn(M, M)
+    U, S, V = cp.linalg.svd(A)
     m = A.shape[1]
     idx = np.arange(m)
     S[rank:] = 0
