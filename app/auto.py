@@ -1,5 +1,4 @@
 from subprocess import run
-from time import sleep
 
 #parts = ["2000", "5000"]
 parts = ["50"] 
