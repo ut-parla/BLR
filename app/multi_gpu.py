@@ -112,33 +112,34 @@ def cp_TSVD(A, tol=1e-5):
 	return U[:, :k] @ cp.diag(S[:k]), Vh[:k, :]
 
 def mgpu_BLR(A, x, partition_size):
-    with Timer.get_handle("multigpu-setup"):
-        n_partitions = A.shape[1] // partition_size
-        A_partitions_rows = partition_matrix(A, partition_size)
-        x_split = cp.asarray(partition_array(x, n_partitions))
-        partitions_list = list(product(range(n_partitions), range(n_partitions)))
-        partition_split = np.array_split(partitions_list, ngpus)
-        init_gpu_cells()
-        call_method_all_cells("set_X", x_split)
+    with Timer.get_handle("total"):
+        with Timer.get_handle("multigpu-setup"):
+            n_partitions = A.shape[1] // partition_size
+            A_partitions_rows = partition_matrix(A, partition_size)
+            x_split = cp.asarray(partition_array(x, n_partitions))
+            partitions_list = list(product(range(n_partitions), range(n_partitions)))
+            partition_split = np.array_split(partitions_list, ngpus)
+            init_gpu_cells()
+            call_method_all_cells("set_X", x_split)
 
-    with Timer.get_handle("multigpu-SVD"):
-        for i, c in gpu_cells.items():
-            c.set_TSVD_partitions(A_partitions_rows, partition_split[i])
-        call_method_all_cells("do_TSVD")
+        with Timer.get_handle("multigpu-SVD"):
+            for i, c in gpu_cells.items():
+                c.set_TSVD_partitions(A_partitions_rows, partition_split[i])
+            call_method_all_cells("do_TSVD")
 
-    with Timer.get_handle("multigpu-BLR-approx"):
-        call_method_all_cells("do_BLR")
+        with Timer.get_handle("multigpu-BLR-approx"):
+            call_method_all_cells("do_BLR")
 
-    #could be done on gpu
-    with Timer.get_handle("multigpu-accumulate"):
-        final_lhs = np.zeros_like(x)
-        final_lhs_split = partition_array(final_lhs, n_partitions)
+        #could be done on gpu
+        with Timer.get_handle("multigpu-accumulate"):
+            final_lhs = np.zeros_like(x)
+            final_lhs_split = partition_array(final_lhs, n_partitions)
 
-        for worker in gpu_cells.values():
-            for i, val in worker.d_lhs_X.items():
-                final_lhs_split[i] += val.get()
+            for worker in gpu_cells.values():
+                for i, val in worker.d_lhs_X.items():
+                    final_lhs_split[i] += val.get()
 
-        res = np.concatenate(final_lhs_split, axis=None)
-        print("mgpu res: ", res)
+            res = np.concatenate(final_lhs_split, axis=None)
+            print("mgpu res: ", res)
 
-    call_method_all_cells("terminate")
+        call_method_all_cells("terminate")

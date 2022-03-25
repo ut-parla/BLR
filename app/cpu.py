@@ -39,21 +39,22 @@ def TSVD(A, tol=1e-5):
 UVs = {}
 
 def cpu_BLR(A, x, partition_size):
-    with Timer.get_handle("cpu-setup"):
-        n_partitions = A.shape[1] // partition_size
-        A_partitions_rows = partition_matrix(A, partition_size)
-        b2_rhs = x.copy()
-        b2_lhs = np.zeros(x.shape)
-        b2_rhs_split = partition_array(b2_rhs, n_partitions)
-        b2_lhs_split = partition_array(b2_lhs, n_partitions)
+    with Timer.get_handle("total"):
+        with Timer.get_handle("cpu-setup"):
+            n_partitions = A.shape[1] // partition_size
+            A_partitions_rows = partition_matrix(A, partition_size)
+            b2_rhs = x.copy()
+            b2_lhs = np.zeros(x.shape)
+            b2_rhs_split = partition_array(b2_rhs, n_partitions)
+            b2_lhs_split = partition_array(b2_lhs, n_partitions)
 
-    with Timer.get_handle("cpu-SVD"):
-        for i in range(n_partitions):
-            UVs[i] = {}
-            for j in range(n_partitions):
-                UVs[i][j] = TSVD(A_partitions_rows[i][j])
+        with Timer.get_handle("cpu-SVD"):
+            for i in range(n_partitions):
+                UVs[i] = {}
+                for j in range(n_partitions):
+                    UVs[i][j] = TSVD(A_partitions_rows[i][j])
 
-    with Timer.get_handle("cpu-BLR"):
-        for i in range(n_partitions):
-            for j in range(n_partitions):
-                b2_lhs_split[i] += UVs[i][j][0] @ (UVs[i][j][1] @ b2_rhs_split[j])
+        with Timer.get_handle("cpu-BLR"):
+            for i in range(n_partitions):
+                for j in range(n_partitions):
+                    b2_lhs_split[i] += UVs[i][j][0] @ (UVs[i][j][1] @ b2_rhs_split[j])
