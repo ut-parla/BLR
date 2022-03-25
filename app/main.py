@@ -34,9 +34,9 @@ def random_matrix_svd(M, rank=10):
     return U @ np.diag(S) @ V
 
 def main():
-    if len(sys.argv) != 5:
+    if len(sys.argv) != 5 and len(sys.argv) != 6:
         print("Need 3 arguments:")
-        print("   : <run> <matrix file path> <array file path> <partition size>")
+        print("   : <run> <type> <matrix file path> <array file path> <partition size>")
         print(" or: <gen> <size> <matrix file path> <array file path>")
         sys.exit(1)
 
@@ -50,23 +50,30 @@ def main():
         np.save(sys.argv[4], x)
         sys.exit(0)
     elif rtype == "run":
-        A = np.load(sys.argv[2])
-        x = np.load(sys.argv[3])
-        partition_size = int(sys.argv[4])
+        A = np.load(sys.argv[3])
+        x = np.load(sys.argv[4])
+        partition_size = int(sys.argv[5])
         
-    #cpu_direct(A, x, partition_size)
-    #cpu_partition(A, x, partition_size)
-    #cpu_BLR(A, x, partition_size)
+        ptype = sys.argv[2]
+        
+        
+        if ptype == "cpudot":
+            cpu_direct(A, x, partition_size)
+        elif ptype == "cpupart":
+            cpu_partition(A, x, partition_size)
+        elif ptype == "cpu_blr":
+            cpu_BLR(A, x, partition_size)
+        elif ptype == "gpudot":
+            gpu_direct(A, x, partition_size)
+        elif ptype == "gpu_blr":
+        #gpu_BLR(A, x, partition_size)
+        elif ptype == "mgpu_blr":
+            mgpu_BLR(A, x, partition_size)
+        elif ptype == "parla":
+            parla_BLR(A, x, partition_size)
 
-    #gpu_direct(A, x, partition_size)
-    #gpu_BLR(A, x, partition_size)
-
-    #mgpu_BLR(A, x, partition_size)
-
-    parla_BLR(A, x, partition_size)
-
-    Timer.print()
-    #os.kill(os.getpid(),11)
+        Timer.print()
+        #os.kill(os.getpid(),11)
 
 if __name__ == "__main__":
     main()
