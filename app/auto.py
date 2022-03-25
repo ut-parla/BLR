@@ -1,12 +1,12 @@
 from subprocess import run
 from time import sleep
 
-#parts = ["2000", "5000"]
-parts = ["50"] 
+parts = ["2000", "5000"]
+#parts = ["50"] 
 rtypes = ["cpu_blr", "mgpu_blr", "parla"]
 #sizes = ["10k", "20k"]
 sizes = ["20k"]
-sizes = ["1k"]
+#sizes = ["1k"]
 
 
 template_cmd = "python app/main.py run {rtype} inputs/Arand{size}.mat.npy inputs/xrand{size}.mat.npy {psize}"
