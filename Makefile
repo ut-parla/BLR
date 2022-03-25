@@ -22,6 +22,12 @@ create-inputs:
 	python app/main.py gen 20000 inputs/Arand20k.mat.npy inputs/xrand20k.mat.npy
 
 run:
+	CUDA_VISIBLE_DEVICES=0   python app/main.py run inputs/Arand10k.mat.npy inputs/xrand10k.mat.npy 1000
+	CUDA_VISIBLE_DEVICES=0,1 python app/main.py run inputs/Arand10k.mat.npy inputs/xrand10k.mat.npy 1000
 	python app/main.py run inputs/Arand10k.mat.npy inputs/xrand10k.mat.npy 1000
-	sleep 5
+
+	CUDA_VISIBLE_DEVICES=0   python app/main.py run inputs/Arand20k.mat.npy inputs/xrand20k.mat.npy 1000
+	CUDA_VISIBLE_DEVICES=0,1 python app/main.py run inputs/Arand20k.mat.npy inputs/xrand20k.mat.npy 1000
 	python app/main.py run inputs/Arand20k.mat.npy inputs/xrand20k.mat.npy 1000
+
+	

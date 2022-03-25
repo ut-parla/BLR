@@ -84,7 +84,7 @@ class GPUCell:
             self.d_lhs_X[x] += cp.matmul(self.d_UVs[x][y][0], cp.matmul(self.d_UVs[x][y][1], self.d_rhs_X[x]))
 
 gpu_cells_initd = False
-ngpus = 2
+ngpus = 4
 gpu_cells = {}
 def init_gpu_cells():
     global gpu_cells_initd
