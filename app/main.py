@@ -66,7 +66,7 @@ def main():
         elif ptype == "gpudot":
             gpu_direct(A, x, partition_size)
         elif ptype == "gpu_blr":
-        #gpu_BLR(A, x, partition_size)
+            gpu_BLR(A, x, partition_size)
         elif ptype == "mgpu_blr":
             mgpu_BLR(A, x, partition_size)
         elif ptype == "parla":
