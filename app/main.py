@@ -52,6 +52,10 @@ def main():
     elif rtype == "run":
         A = np.load(sys.argv[3])
         x = np.load(sys.argv[4])
+
+        A = A.astype(np.float64)
+        x = x.astype(np.float64)
+
         partition_size = int(sys.argv[5])
         
         ptype = sys.argv[2]
