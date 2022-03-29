@@ -11,7 +11,7 @@ fsizes = ["20k"]
 
 
 cmds = {
-"gpu_blr": "python app/main.py run gpu_blr inputs/Arand{fsize}.mat.npy inputs/xrand{fsize}.mat.npy {partsize}",
+"gpu_blr": "CUDA_VISIBLE_DEVICES=0 python app/main.py run gpu_blr inputs/Arand{fsize}.mat.npy inputs/xrand{fsize}.mat.npy {partsize}",
 "2gpu_blr": "CUDA_VISIBLE_DEVICES=0,1 python app/main.py run mgpu_blr inputs/Arand{fsize}.mat.npy inputs/xrand{fsize}.mat.npy {partsize}",
 "4gpu_blr": "python app/main.py run mgpu_blr inputs/Arand{fsize}.mat.npy inputs/xrand{fsize}.mat.npy {partsize}",
 

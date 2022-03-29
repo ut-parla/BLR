@@ -73,11 +73,11 @@ def main():
             elif ptype == "parla":
                 manual_placement = True if sys.argv[7] == "manual" else False
                 use_lazy = True if sys.argv[6] == "lazy" else False
+                print(f"placement manual? {manual_placement}.")
+                print(f"lazy alloc? {use_lazy}")
                 parla_BLR(A, x, partition_size, manual_placement, use_lazy)
 
-        print("in")
         Timer.print(nwarm=0)
-        print("printed")
 
 if __name__ == "__main__":
     main()
