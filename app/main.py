@@ -52,36 +52,33 @@ def main():
     elif rtype == "run":
         A = np.load(sys.argv[3])
         x = np.load(sys.argv[4])
-
         A = A.astype(np.float64)
         x = x.astype(np.float64)
-
         partition_size = int(sys.argv[5])
-        
         ptype = sys.argv[2]
-                
-        if ptype == "cpudot":
-            cpu_direct(A, x, partition_size)
-        elif ptype == "cpupart":
-            cpu_partition(A, x, partition_size)
-        elif ptype == "cpu_blr":
-            cpu_BLR(A, x, partition_size)
-        elif ptype == "gpudot":
-            gpu_direct(A, x, partition_size)
-        elif ptype == "gpu_blr":
-            gpu_BLR(A, x, partition_size)
-        elif ptype == "mgpu_blr":
-            mgpu_BLR(A, x, partition_size)
-        elif ptype == "parla":
-            manual_placement = True if sys.argv[7] == "manual" else False
-            use_lazy = True if sys.argv[6] == "lazy" else False
-            parla_BLR(A, x, partition_size, manual_placement, use_lazy)
+        
+        for _ in range(2):
+            if ptype == "cpudot":
+                cpu_direct(A, x, partition_size)
+            elif ptype == "cpupart":
+                cpu_partition(A, x, partition_size)
+            elif ptype == "cpu_blr":
+                cpu_BLR(A, x, partition_size)
+            elif ptype == "gpudot":
+                gpu_direct(A, x, partition_size)
+            elif ptype == "gpu_blr":
+                gpu_BLR(A, x, partition_size)
+            elif ptype == "mgpu_blr":
+                mgpu_BLR(A, x, partition_size)
+            elif ptype == "parla":
+                manual_placement = True if sys.argv[7] == "manual" else False
+                use_lazy = True if sys.argv[6] == "lazy" else False
+                parla_BLR(A, x, partition_size, manual_placement, use_lazy)
 
-        Timer.print()
-        #os.kill(os.getpid(),11)
+        print("in")
+        Timer.print(nwarm=1)
+        print("printed")
 
 if __name__ == "__main__":
     main()
-
-
 

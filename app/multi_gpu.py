@@ -41,6 +41,7 @@ class GPUCell:
                     args = msg[1]
                     getattr(self, fn_name)(*args)
         print(f"GPU {self.resident_gpu}: thread stopping...")
+        self.done_event.set()
 
     def notify_when_done(fn):     
         @wraps(fn)
@@ -87,13 +88,19 @@ gpu_cells_initd = False
 ngpus = 4
 gpu_cells = {}
 def init_gpu_cells():
-    global gpu_cells_initd
+    global gpu_cells_initd, gpu_cells
     #create the threads if we haven't
     if not gpu_cells_initd:
         for i in range(ngpus):
             gpu_cells[i] = GPUCell(i)
             gpu_cells[i].launch()
         gpu_cells_initd = True
+
+def clean():
+    global gpu_cells_initd, gpu_cells
+    for i in range(ngpus):
+        del gpu_cells[i]
+    gpu_cells_initd = False
 
 def call_method_all_cells(fn_name, *args):
     #send message to all threads
@@ -112,14 +119,15 @@ def cp_TSVD(A, tol=1e-5):
 	return U[:, :k] @ cp.diag(S[:k]), Vh[:k, :]
 
 def mgpu_BLR(A, x, partition_size):
+    init_gpu_cells()
+
     with Timer.get_handle("total"):
         with Timer.get_handle("multigpu-setup"):
             n_partitions = A.shape[1] // partition_size
             A_partitions_rows = partition_matrix(A, partition_size)
             x_split = cp.asarray(partition_array(x, n_partitions))
             partitions_list = list(product(range(n_partitions), range(n_partitions)))
-            partition_split = np.array_split(partitions_list, ngpus)
-            init_gpu_cells()
+            partition_split = np.array_split(partitions_list, ngpus)        
             call_method_all_cells("set_X", x_split)
 
         with Timer.get_handle("multigpu-SVD"):
@@ -140,6 +148,9 @@ def mgpu_BLR(A, x, partition_size):
                     final_lhs_split[i] += val.get()
 
             res = np.concatenate(final_lhs_split, axis=None)
-            print("mgpu res: ", res)
+            #print("mgpu res: ", res)
 
-        call_method_all_cells("terminate")
+    call_method_all_cells("terminate")
+    from time import sleep
+    sleep(1)
+    clean()
