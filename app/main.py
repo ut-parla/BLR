@@ -34,9 +34,9 @@ def random_matrix_svd(M, rank=10):
     return U @ np.diag(S) @ V
 
 def main():
-    if len(sys.argv) != 5 and len(sys.argv) != 6:
-        print("Need 3 arguments:")
-        print("   : <run> <type> <matrix file path> <array file path> <partition size>")
+    if len(sys.argv) < 5:
+        print("Need some arguments:")
+        print("   : <run> <type> <matrix file path> <array file path> <partition size> <parla: lazy or eager> <manual or sched> ")
         print(" or: <gen> <size> <matrix file path> <array file path>")
         sys.exit(1)
 
@@ -73,7 +73,9 @@ def main():
         elif ptype == "mgpu_blr":
             mgpu_BLR(A, x, partition_size)
         elif ptype == "parla":
-            parla_BLR(A, x, partition_size)
+            manual_placement = True if sys.argv[7] == "manual" else False
+            use_lazy = True if sys.argv[6] == "lazy" else False
+            parla_BLR(A, x, partition_size, manual_placement, use_lazy)
 
         Timer.print()
         #os.kill(os.getpid(),11)

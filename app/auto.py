@@ -2,16 +2,18 @@ from subprocess import run
 from time import sleep
 
 parts = ["2000", "5000"]
-#parts = ["50"] 
 rtypes = ["cpu_blr", "mgpu_blr", "parla"]
-#sizes = ["10k", "20k"]
 sizes = ["20k"]
+
+
+#sizes = ["10k", "20k"]
+#parts = ["50"] 
 #sizes = ["1k"]
 
 parla_gpus = ["0", "0,1", None]
 
 
-template_cmd = "python app/main.py run {rtype} inputs/Arand{size}.mat.npy inputs/xrand{size}.mat.npy {psize}"
+template_cmd = "python app/main.py run {rtype} inputs/Arand{size}.mat.npy inputs/xrand{size}.mat.npy {psize} {lazy_or_eager} {manual_or_sched}"
 
 for p in parts:
     for rt in rtypes:
