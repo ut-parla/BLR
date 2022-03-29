@@ -38,9 +38,9 @@ for name, cmd in cmds.items():
                 for pp in parla_plac:
                     for pd in parla_data:
                         ttcmd = tcmd + f" {pd} {pp}"
-                        fname = fname + f"_{pd}_{pp}"
+                        ffname = fname + f"_{pd}_{pp}"
                         print("running  ", ttcmd)
-                        with open(fname+".dat", "w") as outfile:
+                        with open(ffname+".dat", "w") as outfile:
                             pass
                             run(ttcmd, shell=True, stdout=outfile)
                             sleep(2)
