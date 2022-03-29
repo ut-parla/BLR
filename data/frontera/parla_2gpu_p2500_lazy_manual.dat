@@ -1,0 +1,18 @@
+using 2 gpus
+placement manual? True.
+lazy alloc? True
+Device count: 2
+placement manual? True.
+lazy alloc? True
+Device count: 2
+placement manual? True.
+lazy alloc? True
+Device count: 2
+**************************************************
+name           , median 
+parla-setup    , 0.00053
+parla-SVD      , 26.28344
+parla-BLR-approx, 0.25439
+parla-accumulate, 0.01191
+total          , 26.55037
+**************************************************
