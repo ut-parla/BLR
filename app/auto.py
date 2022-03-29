@@ -20,7 +20,8 @@ cmds = {
 "parla_4gpu": "python app/main.py run parla inputs/Arand{fsize}.mat.npy inputs/xrand{fsize}.mat.npy {partsize}",
 }
 
-parla_plac = ["sched", "manual"]
+#parla_plac = ["sched", "manual"]
+parla_plac = ["manual"]
 parla_data = ["eager", "lazy"]
 
 for fsize in fsizes:
@@ -32,8 +33,8 @@ for fsize in fsizes:
             if "parla" not in name:
                 print("running  ", cmd)
                 with open(fname+".dat", "w") as outfile:
-                    pass
-                    #run(cmd, shell=True, stdout=outfile)
+                    #pass
+                    run(cmd, shell=True, stdout=outfile)
             else:
                 for pp in parla_plac:
                     for pd in parla_data:
@@ -42,6 +43,6 @@ for fsize in fsizes:
                         print("running  ", cmd)
                         with open(fname+".dat", "w") as outfile:
                             pass
-                            #run(cmd, shell=True, stdout=outfile)
+                            run(cmd, shell=True, stdout=outfile)
                             sleep(2)
             sleep(2)
