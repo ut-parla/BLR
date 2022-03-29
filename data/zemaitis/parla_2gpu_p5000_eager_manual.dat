@@ -1,0 +1,13 @@
+using 2 gpus
+placement manual? True.
+lazy alloc? False
+placement manual? True.
+lazy alloc? False
+**************************************************
+name           , median 
+parla-setup    , 2.40596
+parla-SVD      , 87.13589
+parla-BLR-approx, 0.02444
+parla-accumulate, 0.00257
+total          , 89.57012
+**************************************************

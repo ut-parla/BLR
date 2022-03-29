@@ -116,14 +116,14 @@ async def parla_BLR_eager(A, x, partition_size, manual_placement):
     gpu_counter = 0
 
     with Timer.get_handle("total"):
-        n_partitions = A.shape[1] // partition_size
-        cp_UVs = {}
+        with Timer.get_handle("parla-setup"):
+            n_partitions = A.shape[1] // partition_size
+            cp_UVs = {}
 
-        A_partitions_rows = partition_matrix(A, partition_size)
-        cp_A_partitions_rows = cp.asarray(A_partitions_rows)
+            A_partitions_rows = partition_matrix(A, partition_size)
+            cp_A_partitions_rows = cp.asarray(A_partitions_rows)
 
         svd_TS = TaskSpace("SVD")
-
         with Timer.get_handle("parla-SVD"):
             for i in range(n_partitions):
                 cp_UVs[i] = {}
@@ -138,14 +138,11 @@ async def parla_BLR_eager(A, x, partition_size, manual_placement):
                     def tsvd_task():
                         xx = clone_here(cp_A_partitions_rows[i][j])
                         cp_UVs[i][j] = cp_TSVD(xx)
+            await svd_TS
 
         cp_b2_rhs = cp.asarray(x)
         cp_b2_lhs = cp.zeros(x.shape)
-
         cp_b2_rhs_split = cp_partition_array(cp_b2_rhs, n_partitions)
-
-        await svd_TS
-
         #reset
         gpu_counter = 0
         
@@ -169,8 +166,7 @@ async def parla_BLR_eager(A, x, partition_size, manual_placement):
                         
                         cp.matmul(u, cp.matmul(v, r))
                         b_lhs[i][j] = cp.matmul(u, cp.matmul(v, r))
-
-        await BLR_TS 
+            await BLR_TS 
 
         with Timer.get_handle("parla-accumulate"):
             final_lhs = np.zeros_like(x)

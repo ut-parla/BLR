@@ -1,0 +1,17 @@
+using 2 gpus
+Thread running in cuda context, GPU #0
+Thread running in cuda context, GPU #1
+GPU 0: thread stopping...
+GPU 1: thread stopping...
+Thread running in cuda context, GPU #0
+Thread running in cuda context, GPU #1
+GPU 1: thread stopping...
+GPU 0: thread stopping...
+**************************************************
+name           , median 
+multigpu-setup , 0.22975
+multigpu-SVD   , 104.46567
+multigpu-BLR-approx, 0.00561
+multigpu-accumulate, 0.00101
+total          , 104.70213
+**************************************************
