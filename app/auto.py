@@ -3,11 +3,10 @@ from subprocess import run
 from time import sleep
 
 psizes = ["2000", "5000"]
-
-#psizes = ["250"]
+psizes = ["250"]
 
 fsizes = ["20k"]
-#fsizes = ["1k"]
+fsizes = ["1k"]
 
 
 cmds = {
@@ -24,25 +23,25 @@ cmds = {
 parla_plac = ["manual"]
 parla_data = ["eager", "lazy"]
 
-for fsize in fsizes:
-    for psize in psizes:
-        for name, cmd in cmds.items():
+for name, cmd in cmds.items():
+    for fsize in fsizes:
+        for psize in psizes:
             fname = f"{name}_p{psize}"
-            cmd = cmd.format(partsize=psize, fsize=fsize)
+            tcmd = cmd.format(partsize=psize, fsize=fsize)
 
             if "parla" not in name:
-                print("running  ", cmd)
+                print("running  ", tcmd)
                 with open(fname+".dat", "w") as outfile:
                     #pass
-                    run(cmd, shell=True, stdout=outfile)
+                    run(tcmd, shell=True, stdout=outfile)
             else:
                 for pp in parla_plac:
                     for pd in parla_data:
-                        cmd = cmd + f" {pd} {pp}"
+                        tcmd = tcmd + f" {pd} {pp}"
                         fname = fname + f"_{pd}_{pp}"
-                        print("running  ", cmd)
+                        print("running  ", tcmd)
                         with open(fname+".dat", "w") as outfile:
                             pass
-                            run(cmd, shell=True, stdout=outfile)
+                            run(tcmd, shell=True, stdout=outfile)
                             sleep(2)
             sleep(2)
