@@ -2,12 +2,12 @@
 from subprocess import run
 from time import sleep
 
-#psizes = ["2000", "5000"]
+psizes = ["2000", "5000"]
 
-psizes = ["250"]
+#psizes = ["250"]
 
-#fsizes = ["20k"]
-fsizes = ["1k"]
+fsizes = ["20k"]
+#fsizes = ["1k"]
 
 
 cmds = {
@@ -32,7 +32,8 @@ for fsize in fsizes:
             if "parla" not in name:
                 print("running  ", cmd)
                 with open(fname+".dat", "w") as outfile:
-                    run(cmd, shell=True, stdout=outfile)
+                    pass
+                    #run(cmd, shell=True, stdout=outfile)
             else:
                 for pp in parla_plac:
                     for pd in parla_data:
@@ -40,5 +41,7 @@ for fsize in fsizes:
                         fname = fname + f"_{pd}_{pp}"
                         print("running  ", cmd)
                         with open(fname+".dat", "w") as outfile:
-                            run(cmd, shell=True, stdout=outfile)
+                            pass
+                            #run(cmd, shell=True, stdout=outfile)
+                            sleep(2)
             sleep(2)
