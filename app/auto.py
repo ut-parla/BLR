@@ -2,11 +2,12 @@
 from subprocess import run
 from time import sleep
 
-psizes = ["2000", "5000"]
-psizes = ["250"]
+#psizes = ["2000", "5000"]
+#psizes = ["250"]
+psizes = ["5000"]
 
 fsizes = ["20k"]
-fsizes = ["1k"]
+#fsizes = ["1k"]
 
 
 cmds = {
@@ -14,9 +15,9 @@ cmds = {
 "2gpu_blr": "CUDA_VISIBLE_DEVICES=0,1 python app/main.py run mgpu_blr inputs/Arand{fsize}.mat.npy inputs/xrand{fsize}.mat.npy {partsize}",
 "4gpu_blr": "python app/main.py run mgpu_blr inputs/Arand{fsize}.mat.npy inputs/xrand{fsize}.mat.npy {partsize}",
 
-"parla_1gpu": "CUDA_VISIBLE_DEVICES=0 python app/main.py run parla inputs/Arand{fsize}.mat.npy inputs/xrand{fsize}.mat.npy {partsize}",
-"parla_2gpu": "CUDA_VISIBLE_DEVICES=0,1 python app/main.py run parla inputs/Arand{fsize}.mat.npy inputs/xrand{fsize}.mat.npy {partsize}",
-"parla_4gpu": "python app/main.py run parla inputs/Arand{fsize}.mat.npy inputs/xrand{fsize}.mat.npy {partsize}",
+#"parla_1gpu": "CUDA_VISIBLE_DEVICES=0 python app/main.py run parla inputs/Arand{fsize}.mat.npy inputs/xrand{fsize}.mat.npy {partsize}",
+#"parla_2gpu": "CUDA_VISIBLE_DEVICES=0,1 python app/main.py run parla inputs/Arand{fsize}.mat.npy inputs/xrand{fsize}.mat.npy {partsize}",
+#"parla_4gpu": "python app/main.py run parla inputs/Arand{fsize}.mat.npy inputs/xrand{fsize}.mat.npy {partsize}",
 }
 
 #parla_plac = ["sched", "manual"]
