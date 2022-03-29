@@ -57,7 +57,7 @@ def main():
         partition_size = int(sys.argv[5])
         ptype = sys.argv[2]
         
-        for _ in range(2):
+        for _ in range(3):
             if ptype == "cpudot":
                 cpu_direct(A, x, partition_size)
             elif ptype == "cpupart":
@@ -77,7 +77,8 @@ def main():
                 print(f"lazy alloc? {use_lazy}")
                 parla_BLR(A, x, partition_size, manual_placement, use_lazy)
 
-        Timer.print(nwarm=0)
+        #nwarm < nruns
+        Timer.print(nwarm=1)
 
 if __name__ == "__main__":
     main()
