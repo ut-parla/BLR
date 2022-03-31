@@ -1,15 +1,18 @@
 using 1 gpus
 placement manual? False.
 lazy alloc? False
+Device count: 1
 placement manual? False.
 lazy alloc? False
+Device count: 1
 placement manual? False.
 lazy alloc? False
+Device count: 1
 **************************************************
 name           , median 
-parla-setup    , 0.42314
-parla-SVD      , 46.61014
-parla-BLR-approx, 0.01305
-parla-accumulate, 0.00114
-total          , 47.04801
+parla-setup    , 0.00048
+parla-SVD      , 50.17705
+parla-BLR-approx, 0.03780
+parla-accumulate, 0.00113
+total          , 50.21658
 **************************************************
