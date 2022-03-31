@@ -2,7 +2,7 @@ from re import U
 import cupy as cp
 import numpy as np
 from timer import Timer
-from common import partition_array, partition_matrix, cp_partition_array
+from common import partition_array, actual_partition_matrix, cp_partition_array
 
 from parla import Parla
 from parla.array import copy, clone_here
@@ -39,7 +39,7 @@ async def parla_BLR_eager(A, x, partition_size, manual_placement=True):
         with Timer.get_handle("parla-setup"):
             n_partitions = A.shape[1] // partition_size
             
-            A_partitions_rows = partition_matrix(A, partition_size)
+            A_partitions_rows = actual_partition_matrix(A, partition_size)
             A_partitions = asarray_batch(A_partitions_rows)
 
             x_rhs = np.array(x, copy=True)
@@ -120,8 +120,13 @@ async def parla_BLR_lazy(A, x, partition_size, manual_placement):
             n_partitions = A.shape[1] // partition_size
             cp_UVs = {}
 
-            A_partitions_rows = partition_matrix(A, partition_size)
-            cp_A_partitions_rows = cp.asarray(A_partitions_rows)
+            A_partitions_rows = actual_partition_matrix(A, partition_size)
+            
+            #cp_A_partitions_rows = cp.asarray(A_partitions_rows)
+            for ii in range(A_partitions_rows):
+                for jj in range(A_partitions_rows):
+                    cp_A_partitions_rows = cp.asarray(cp_A_partitions_rows[ii][jj])
+
 
         svd_TS = TaskSpace("SVD")
         with Timer.get_handle("parla-SVD"):
