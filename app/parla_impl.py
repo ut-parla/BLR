@@ -30,7 +30,7 @@ def parla_BLR(A, x, partition_size, manual_placement, use_lazy):
                 await parla_BLR_eager(A, x, partition_size, manual_placement)
 
 
-async def parla_BLR_lazy(A, x, partition_size, manual_placement=True):
+async def parla_BLR_eager(A, x, partition_size, manual_placement=True):
     ngpus = cp.cuda.runtime.getDeviceCount()
     print(f"Device count: {ngpus}")
     gpu_counter = 0
@@ -110,7 +110,7 @@ async def parla_BLR_lazy(A, x, partition_size, manual_placement=True):
 
 
 
-async def parla_BLR_eager(A, x, partition_size, manual_placement):
+async def parla_BLR_lazy(A, x, partition_size, manual_placement):
 
     ngpus = cp.cuda.runtime.getDeviceCount()
     gpu_counter = 0
