@@ -17,3 +17,4 @@ def actual_partition_matrix(A, block_size):
         ap_list.append(list())
         for j in range(n//block_size):
             ap_list[i].append(np.asarray(A[i*block_size:(i+1)*block_size,j*block_size:(j+1)*block_size], order='F'))
+    return ap_list

@@ -120,12 +120,12 @@ async def parla_BLR_lazy(A, x, partition_size, manual_placement):
             n_partitions = A.shape[1] // partition_size
             cp_UVs = {}
 
-            A_partitions_rows = actual_partition_matrix(A, partition_size)
+            cp_A_partitions_rows = actual_partition_matrix(A, partition_size)
             
             #cp_A_partitions_rows = cp.asarray(A_partitions_rows)
-            for ii in range(A_partitions_rows):
-                for jj in range(A_partitions_rows):
-                    cp_A_partitions_rows = cp.asarray(cp_A_partitions_rows[ii][jj])
+            for ii in range(len(cp_A_partitions_rows)):
+                for jj in range(len(cp_A_partitions_rows)):
+                    cp_A_partitions_rows[ii][jj] = cp.asarray(cp_A_partitions_rows[ii][jj])
 
 
         svd_TS = TaskSpace("SVD")
