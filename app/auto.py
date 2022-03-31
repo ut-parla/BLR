@@ -20,9 +20,9 @@ cmds = {
 }
 
 #parla_plac = ["sched", "manual"]
-parla_plac = ["sched"]
-#parla_data = ["eager", "lazy"]
-parla_data = ["eager"]
+parla_plac = ["manual"]
+parla_data = ["eager", "lazy"]
+#parla_data = ["eager"]
 
 for name, cmd in cmds.items():
     for fsize in fsizes:

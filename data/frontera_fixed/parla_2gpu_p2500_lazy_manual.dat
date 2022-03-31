@@ -1,0 +1,219 @@
+using 2 gpus
+placement manual? True.
+lazy alloc? True
+dev<CPU 0>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+placement manual? True.
+lazy alloc? True
+dev<CPU 0>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+placement manual? True.
+lazy alloc? True
+dev<CPU 0>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, -1 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 0>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+dev<CUDA 1>, 30.0, 0.0, 30.0, 0.0, 1.0 0 0
+we done
+**************************************************
+name           , median 
+parla-setup    , 0.66016
+parla-SVD      , 26.80629
+parla-BLR-approx, 0.01534
+parla-accumulate, 0.00107
+total          , 27.48340
+**************************************************
