@@ -63,7 +63,7 @@ async def parla_BLR_eager(A, x, partition_size, manual_placement=True):
                         plac = gpu(gpu_counter%ngpus)
                         gpu_counter += 1
 
-                    @spawn(svd_TS[i, j], placement=plac, input=[A_partitions], output=[*cp_UVs[i][j]])
+                    @spawn(svd_TS[i, j], placement=plac, input=[A_partitions[i][j]], output=[*cp_UVs[i][j]])
                     def tsvd_task():
                         u, v = cp_TSVD(A_partitions[i][j].array)
                         cp_UVs[i][j][0].update(u) 
