@@ -18,7 +18,7 @@ conda-init:
 
 create-inputs:
 	mkdir inputs
-	python app/main.py gen 10000 inputs/Arand10k.mat.npy inputs/xrand10k.mat.npy
+	python app/main.py -mode gen -nblocks 4 -b 2500 -matrix inputs/matrix.npy -vector inputs/vector.npy
 
 # run:
 # 	CUDA_VISIBLE_DEVICES=0   python app/main.py run inputs/Arand10k.mat.npy inputs/xrand10k.mat.npy 1000
